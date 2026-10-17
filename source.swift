@@ -13,7 +13,7 @@ public class FoxOverlayController {
             
             let btn = UIButton(type: .custom)
             btn.frame = CGRect(x: 20, y: 150, width: 60, height: 60)
-            btn.backgroundColor = UIColor.systemIndigo.withAlphaComponent(0.85)
+            btn.backgroundColor = UIColor.purple.withAlphaComponent(0.85)
             btn.setTitle("FOX", for: .normal)
             btn.setTitleColor(.white, for: .normal)
             btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
@@ -57,7 +57,7 @@ public class FoxOverlayController {
         container.backgroundColor = UIColor.black.withAlphaComponent(0.9)
         container.layer.cornerRadius = 16
         container.layer.borderWidth = 1
-        container.layer.borderColor = UIColor.systemIndigo.cgColor
+        container.layer.borderColor = UIColor.purple.cgColor
         
         let titleLabel = UILabel(frame: CGRect(x: 16, y: 16, width: 248, height: 30))
         titleLabel.text = "FOX CONFIG MENU"
@@ -69,7 +69,7 @@ public class FoxOverlayController {
         closeBtn.frame = CGRect(x: 16, y: 290, width: 248, height: 40)
         closeBtn.setTitle("Close", for: .normal)
         closeBtn.setTitleColor(.white, for: .normal)
-        closeBtn.backgroundColor = UIColor.systemRed.withAlphaComponent(0.8)
+        closeBtn.backgroundColor = UIColor.red.withAlphaComponent(0.8)
         closeBtn.layer.cornerRadius = 8
         closeBtn.addTarget(self, action: #selector(toggleMenu), for: .touchUpInside)
         container.addSubview(closeBtn)
@@ -85,7 +85,7 @@ public class FoxOverlayController {
 }
 
 @objc class FoxInitializer: NSObject {
-    @objc public static func initialize() {
+    @objc public static func loadInjection() {
         FoxOverlayController.shared.setupOverlay()
     }
 }
