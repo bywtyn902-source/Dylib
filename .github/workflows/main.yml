@@ -13,13 +13,13 @@ jobs:
 
     - name: Set up environment
       run: |
-        echo "FOX CONFIG: Checking build environment..."
         swift --version
 
-    - name: Compile Target Library
+    - name: Compile to Dylib
       run: |
         mkdir -p output
-        echo "FOX CONFIG: Pipeline initialized successfully."
+        swiftc -emit-library -emit-module -dynamiclib -o output/fox.dylib source.swift
+        ls -la output/
     
     - name: Save Build Artifacts
       uses: actions/upload-artifact@v4
