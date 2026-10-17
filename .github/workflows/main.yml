@@ -15,10 +15,11 @@ jobs:
       run: |
         swift --version
 
-    - name: Compile to Dylib
+    - name: Compile to iOS Dylib
       run: |
         mkdir -p output
-        swiftc -emit-library -o output/fox.dylib source.swift
+        SDK_PATH=$(xcrun --sdk iphoneos --show-sdk-path)
+        swiftc -target arm64-apple-ios -sdk $SDK_PATH -emit-library -o output/fox.dylib source.swift
         ls -la output/
     
     - name: Save Build Artifacts
