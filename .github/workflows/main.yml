@@ -20,10 +20,9 @@ jobs:
       run: |
         mkdir -p output
         echo "FOX CONFIG: Pipeline initialized successfully."
-        # Add compilation commands here for dynamic library packaging
     
     - name: Save Build Artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: FoxOverlayBinary
         path: output/
