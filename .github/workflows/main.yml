@@ -18,7 +18,7 @@ jobs:
     - name: Compile to Dylib
       run: |
         mkdir -p output
-        swiftc -emit-library -emit-module -dynamiclib -o output/fox.dylib source.swift
+        swiftc -emit-library -dynamiclib -o output/fox.dylib source.swift
         ls -la output/
     
     - name: Save Build Artifacts
