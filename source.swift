@@ -10,7 +10,6 @@ class FloatingMenuController {
     func setupOverlay() {
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
         
-        // Create Floating Button
         let btn = UIButton(type: .custom)
         btn.frame = CGRect(x: 20, y: 150, width: 60, height: 60)
         btn.backgroundColor = UIColor.systemIndigo.withAlphaComponent(0.8)
@@ -18,18 +17,11 @@ class FloatingMenuController {
         btn.setTitleColor(.white, for: .normal)
         btn.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         btn.layer.cornerRadius = 30
-        btn.layer.shadowColor = UIColor.black.cgColor
-        btn.layer.shadowOpacity = 0.4
-        btn.layer.shadowOffset = CGSize(width: 0, height: 4)
         
-        // Add pan gesture for dragging
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(_:)))
         btn.addGestureRecognizer(panGesture)
-        
-        // Add tap action to toggle menu
         btn.addTarget(self, action: #selector(toggleMenu), for: .touchUpInside)
         
-        // Attach to root window safely
         if let keyWindow = windowScene.windows.first(where: { $0.isKeyWindow }) {
             keyWindow.addSubview(btn)
             self.floatingButton = btn
@@ -59,36 +51,12 @@ class FloatingMenuController {
         let container = UIView(frame: CGRect(x: 50, y: 220, width: 280, height: 350))
         container.backgroundColor = UIColor.black.withAlphaComponent(0.85)
         container.layer.cornerRadius = 16
-        container.layer.borderWidth = 1
-        container.layer.borderColor = UIColor.systemIndigo.cgColor
         
-        // Title Label
         let titleLabel = UILabel(frame: CGRect(x: 16, y: 16, width: 248, height: 30))
         titleLabel.text = "FOX CONFIG MENU"
         titleLabel.textColor = .white
         titleLabel.font = UIFont.boldSystemFont(ofSize: 16)
         container.addSubview(titleLabel)
-        
-        // Feature Toggle
-        let toggleLabel = UILabel(frame: CGRect(x: 16, y: 70, width: 180, height: 30))
-        toggleLabel.text = "Entity Radar"
-        toggleLabel.textColor = .lightGray
-        toggleLabel.font = UIFont.systemFont(ofSize: 14)
-        container.addSubview(toggleLabel)
-        
-        let switchControl = UISwitch(frame: CGRect(x: 210, y: 70, width: 50, height: 30))
-        switchControl.addTarget(self, action: #selector(featureToggled(_:)), for: .valueChanged)
-        container.addSubview(switchControl)
-        
-        // Close Button
-        let closeBtn = UIButton(type: .system)
-        closeBtn.frame = CGRect(x: 16, y: 290, width: 248, height: 40)
-        closeBtn.setTitle("Close Menu", for: .normal)
-        closeBtn.setTitleColor(.white, for: .normal)
-        closeBtn.backgroundColor = UIColor.systemRed.withAlphaComponent(0.7)
-        closeBtn.layer.cornerRadius = 8
-        closeBtn.addTarget(self, action: #selector(toggleMenu), for: .touchUpInside)
-        container.addSubview(closeBtn)
         
         keyWindow.addSubview(container)
         self.menuView = container
@@ -97,9 +65,5 @@ class FloatingMenuController {
     private func hideMenu() {
         menuView?.removeFromSuperview()
         menuView = nil
-    }
-
-    @objc private func featureToggled(_ sender: UISwitch) {
-        print("Feature active: \(sender.isOn)")
     }
 }
